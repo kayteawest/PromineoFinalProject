@@ -35,7 +35,7 @@ public class PlayerCharactersDataAccess implements IPlayerCharactersDataAccessLa
 		params.put("p_initiativeBonus", initiativeBonus);
 
 		// Execute stored procedure and return result
-		Integer playerCharacterId = jdbcTemplate.execute(
+		int playerCharacterId = jdbcTemplate.execute(
 				"{call Insert_PlayerCharacter(:p_playerId,:p_characterName,:p_initiativeBonus)}", params,
 				new PreparedStatementCallback<Integer>() {
 
@@ -50,7 +50,7 @@ public class PlayerCharactersDataAccess implements IPlayerCharactersDataAccessLa
 						resultSet.next();
 
 						// Map first row/column value to id
-						Integer id = resultSet.getInt(1);
+						int id = resultSet.getInt(1);
 
 						// Close the connection
 						resultSet.close();
@@ -58,7 +58,6 @@ public class PlayerCharactersDataAccess implements IPlayerCharactersDataAccessLa
 						// Return id
 						return id;
 					}
-
 				});
 
 		// Return playerCharacter id
@@ -87,14 +86,14 @@ public class PlayerCharactersDataAccess implements IPlayerCharactersDataAccessLa
 						resultSet.next();
 
 						// Create formatter to parse MySql DATETIME to LocalDateTime
-						var format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+						DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 						// Map first row to Player
-						var characterId = resultSet.getInt(1);
-						var playerId = resultSet.getInt(2);
-						var characterName = resultSet.getString(3);
-						var createdDate = LocalDateTime.parse(resultSet.getString(4), format);
-						var initiativeBonus = resultSet.getInt(5);
+						int characterId = resultSet.getInt(1);
+						int playerId = resultSet.getInt(2);
+						String characterName = resultSet.getString(3);
+						LocalDateTime createdDate = LocalDateTime.parse(resultSet.getString(4), format);
+						int initiativeBonus = resultSet.getInt(5);
 
 						// Close the connection
 						resultSet.close();
@@ -102,12 +101,10 @@ public class PlayerCharactersDataAccess implements IPlayerCharactersDataAccessLa
 						// Return PlayerCharacter
 						return new PlayerCharacter(characterId, playerId, characterName, createdDate, initiativeBonus);
 					}
-
 				});
 
 		// Return PlayerCharacter
 		return playerCharacter;
-
 	}
 
 	@Override
@@ -122,7 +119,6 @@ public class PlayerCharactersDataAccess implements IPlayerCharactersDataAccessLa
 		// Execute stored procedure
 		jdbcTemplate.update("{call Update_PlayerCharacter_ById(:p_characterId,:p_characterName,:p_initiativeBonus)}",
 				params);
-
 	}
 
 	@Override
@@ -134,7 +130,5 @@ public class PlayerCharactersDataAccess implements IPlayerCharactersDataAccessLa
 
 		// Execute stored procedure
 		jdbcTemplate.update("{call Delete_PlayerCharacter_ById(:p_characterId)}", params);
-
 	}
-
 }

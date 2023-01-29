@@ -34,7 +34,7 @@ public class CampaignsDataAccess implements ICampaignsDataAccessLayer {
 		params.put("p_dungeonMaster", dungeonMaster);
 
 		// Execute stored procedure and return result
-		Integer campaignId = jdbcTemplate.execute("{call Insert_Campaign(:p_campaignName,:p_dungeonMaster)}", params,
+		int campaignId = jdbcTemplate.execute("{call Insert_Campaign(:p_campaignName,:p_dungeonMaster)}", params,
 				new PreparedStatementCallback<Integer>() {
 
 					@Override
@@ -48,7 +48,7 @@ public class CampaignsDataAccess implements ICampaignsDataAccessLayer {
 						resultSet.next();
 
 						// Map first row/column value to id
-						Integer id = resultSet.getInt(1);
+						int id = resultSet.getInt(1);
 
 						// Close the connection
 						resultSet.close();
@@ -56,12 +56,10 @@ public class CampaignsDataAccess implements ICampaignsDataAccessLayer {
 						// Return id
 						return id;
 					}
-
 				});
 
 		// Return campaign id
 		return campaignId;
-
 	}
 
 	@Override
@@ -86,18 +84,18 @@ public class CampaignsDataAccess implements ICampaignsDataAccessLayer {
 						resultSet.next();
 
 						// Create formatter to parse MySql DATETIME to LocalDateTime
-						var format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+						DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 						// Map first row to Campaign
-						var campaignId = resultSet.getInt(1);
-						var createdDate = LocalDateTime.parse(resultSet.getString(2), format);
-						var campaignName = resultSet.getString(3);
-						var dungeonMaster = resultSet.getString(4);
+						int campaignId = resultSet.getInt(1);
+						LocalDateTime createdDate = LocalDateTime.parse(resultSet.getString(2), format);
+						String campaignName = resultSet.getString(3);
+						String dungeonMaster = resultSet.getString(4);
 
 						// lastEncounterDate might be null from the database
 						LocalDateTime lastEncounterDate = null;
 
-						var lastEncounterString = resultSet.getString(5);
+						String lastEncounterString = resultSet.getString(5);
 
 						// Parse the string if it's not null
 						if (lastEncounterString != null) {
@@ -110,12 +108,10 @@ public class CampaignsDataAccess implements ICampaignsDataAccessLayer {
 						// Return Campaign
 						return new Campaign(campaignId, createdDate, campaignName, dungeonMaster, lastEncounterDate);
 					}
-
 				});
 
 		// Return Campaign
 		return campaign;
-
 	}
 
 	@Override
@@ -129,7 +125,6 @@ public class CampaignsDataAccess implements ICampaignsDataAccessLayer {
 
 		// Execute stored procedure
 		jdbcTemplate.update("{call Update_Campaign_ById(:p_campaignId, :p_campaignName,:p_dungeonMaster)}", params);
-
 	}
 
 	@Override
@@ -141,7 +136,5 @@ public class CampaignsDataAccess implements ICampaignsDataAccessLayer {
 
 		// Execute stored procedure
 		jdbcTemplate.update("{call Delete_Campaign_ById(:p_campaignId)}", params);
-
 	}
-
 }

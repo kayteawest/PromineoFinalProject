@@ -83,7 +83,7 @@ END //
 CREATE PROCEDURE Delete_Encounter_PlayerCharacter_ByIds(IN p_encounterId INT,
                                                         IN p_characterId INT)
 BEGIN
-  DELETE FROM EncounterPlayerCharacter
+  DELETE FROM Encounter_PlayerCharacter
   WHERE encounterId = p_encounterId AND
         characterId = p_characterId;
 END //

@@ -1,0 +1,436 @@
+{
+	"info": {
+		"_postman_id": "857e2746-6ef3-4e6d-895b-a8cf343006a5",
+		"name": "PromineoFinalProject",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Campaigns",
+			"item": [
+				{
+					"name": "Create Campaign",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"campaignName\": \"My Campaign\",\r\n    \"dungeonMaster\": \"Katie\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/campaigns/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"campaigns",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Campaign by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/campaigns/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"campaigns",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Campaign by Id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"campaignName\": \"My Awesome Campaign\",\r\n    \"dungeonMaster\": \"Katie Westcott\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/campaigns/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"campaigns",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Campaign by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/campaigns/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"campaigns",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Encounters",
+			"item": [
+				{
+					"name": "Create Encounter",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"campaignId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/encounters/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"encounters",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Encounter with PlayerCharacters",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"campaignId\": 11,\r\n    \"playerCharacterIds\": [\r\n        1,\r\n        2,\r\n        3\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/encounters/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"encounters",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Encounter by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/encounters/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"encounters",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Encounter by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/encounters/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"encounters",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Players",
+			"item": [
+				{
+					"name": "Create Player",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"playerName\": \"Katie\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/players/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"players",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Player with PlayerCharacters",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"playerName\": \"Katie\",\r\n    \"characters\": [\r\n        {\r\n            \"characterName\": \"My Character\",\r\n            \"initiativeBonus\": 7\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/players/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"players",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create PlayerCharacter",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"characterName\": \"Benny\",\r\n    \"initiativeBonus\": 7\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/players/3/playerCharacters/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"players",
+								"3",
+								"playerCharacters",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Player by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/players/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"players",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get PlayerCharacter by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/players/3/playerCharacters/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"players",
+								"3",
+								"playerCharacters",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Player by Id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"playerName\": \"Katie Westcott\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/players/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"players",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update PlayerCharacter by Id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"playerCharacterName\": \"Benny the Gnome\",\r\n    \"initiativeBonus\": 17\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/players/3/playerCharacters/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"players",
+								"3",
+								"playerCharacters",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Player by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/players/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"players",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete PlayerCharacter by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/players/3/playerCharacters/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"players",
+								"3",
+								"playerCharacters",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

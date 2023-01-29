@@ -33,7 +33,7 @@ public class PlayersDataAccess implements IPlayersDataAccessLayer {
 		params.put("p_playerName", playerName);
 
 		// Execute stored procedure and return result
-		Integer playerId = jdbcTemplate.execute("{call Insert_Player(:p_playerName)}", params,
+		int playerId = jdbcTemplate.execute("{call Insert_Player(:p_playerName)}", params,
 				new PreparedStatementCallback<Integer>() {
 
 					@Override
@@ -47,7 +47,7 @@ public class PlayersDataAccess implements IPlayersDataAccessLayer {
 						resultSet.next();
 
 						// Map first row/column value to id
-						Integer id = resultSet.getInt(1);
+						int id = resultSet.getInt(1);
 
 						// Close the connection
 						resultSet.close();
@@ -55,12 +55,10 @@ public class PlayersDataAccess implements IPlayersDataAccessLayer {
 						// Return id
 						return id;
 					}
-
 				});
 
 		// Return player id
 		return playerId;
-
 	}
 
 	@Override
@@ -84,12 +82,12 @@ public class PlayersDataAccess implements IPlayersDataAccessLayer {
 						resultSet.next();
 
 						// Create formatter to parse MySql DATETIME to LocalDateTime
-						var format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+						DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 						// Map first row to Player
-						var playerId = resultSet.getInt(1);
-						var playerName = resultSet.getString(2);
-						var createdDate = LocalDateTime.parse(resultSet.getString(3), format);
+						int playerId = resultSet.getInt(1);
+						String playerName = resultSet.getString(2);
+						LocalDateTime createdDate = LocalDateTime.parse(resultSet.getString(3), format);
 
 						// Close the connection
 						resultSet.close();
@@ -97,12 +95,10 @@ public class PlayersDataAccess implements IPlayersDataAccessLayer {
 						// Return Player
 						return new Player(playerId, playerName, createdDate);
 					}
-
 				});
 
 		// Return Player
 		return player;
-
 	}
 
 	@Override
@@ -115,7 +111,6 @@ public class PlayersDataAccess implements IPlayersDataAccessLayer {
 
 		// Execute stored procedure
 		jdbcTemplate.update("{call Update_Player_ById(:p_playerId,:p_playerName)}", params);
-
 	}
 
 	@Override
@@ -127,7 +122,5 @@ public class PlayersDataAccess implements IPlayersDataAccessLayer {
 
 		// Execute stored procedure
 		jdbcTemplate.update("{call Delete_Player_ById(:p_playerId)}", params);
-
 	}
-
 }

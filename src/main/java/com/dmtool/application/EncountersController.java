@@ -21,13 +21,13 @@ public class EncountersController implements IEncountersController {
 	@Override
 	public int createEncounter(CreateEncounterRequest createEncounterRequest) {
 
-		var encounterId = encountersDataAccess.insertEncounter(createEncounterRequest.getCampaignId());
+		int encounterId = encountersDataAccess.insertEncounter(createEncounterRequest.getCampaignId());
 
-		var characterIds = createEncounterRequest.getPlayerCharacterIds();
+		int[] characterIds = createEncounterRequest.getPlayerCharacterIds();
 
 		if (characterIds != null) {
 
-			for (Integer id : characterIds) {
+			for (int id : characterIds) {
 
 				addPlayerCharacter(encounterId, id);
 
@@ -42,28 +42,23 @@ public class EncountersController implements IEncountersController {
 	public Encounter getEncounter(int encounterId) {
 
 		return encountersDataAccess.selectEncounterById(encounterId);
-
 	}
 
 	@Override
 	public void addPlayerCharacter(int encounterId, int playerCharacterId) {
 
 		encounterPlayerCharacterDataAccess.insertEncounterPlayerCharacter(encounterId, playerCharacterId);
-
 	}
 
 	@Override
 	public void removePlayerCharacter(int encounterId, int playerCharacterId) {
 
 		encounterPlayerCharacterDataAccess.deleteEncounterPlayerCharacter(encounterId, playerCharacterId);
-
 	}
 
 	@Override
 	public void deleteEncounter(int encounterId) {
 
 		encountersDataAccess.deleteEncounterById(encounterId);
-
 	}
-
 }

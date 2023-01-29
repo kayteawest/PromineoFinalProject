@@ -26,8 +26,7 @@ public class EncounterPlayerCharacterDataAccess implements IEncounterPlayerChara
 		params.put("p_characterId", characterId);
 
 		// Execute stored procedure
-		jdbcTemplate.update("{call Insert_Encounter_PlayerCharacter_ByIds(:p_encounterId,:p_characterId)}", params);
-
+		jdbcTemplate.update("{call Insert_Encounter_PlayerCharacter(:p_encounterId,:p_characterId)}", params);
 	}
 
 	@Override
@@ -40,7 +39,5 @@ public class EncounterPlayerCharacterDataAccess implements IEncounterPlayerChara
 
 		// Execute stored procedure
 		jdbcTemplate.update("{call Delete_Encounter_PlayerCharacter_ByIds(:p_encounterId,:p_characterId)}", params);
-
 	}
-
 }

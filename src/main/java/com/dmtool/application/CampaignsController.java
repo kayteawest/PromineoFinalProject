@@ -20,14 +20,12 @@ public class CampaignsController implements ICampaignsController {
 
 		return campaignsDataAccess.insertCampaign(createCampaignRequest.getCampaignName(),
 				createCampaignRequest.getDungeonMaster());
-
 	}
 
 	@Override
 	public Campaign getCampaign(int campaignId) {
 
 		return campaignsDataAccess.selectCampaignById(campaignId);
-
 	}
 
 	@Override
@@ -35,14 +33,11 @@ public class CampaignsController implements ICampaignsController {
 
 		campaignsDataAccess.updateCampaignById(campaignId, updateCampaignRequest.getCampaignName(),
 				updateCampaignRequest.getDungeonMaster());
-
 	}
 
 	@Override
 	public void deleteCampaign(int campaignId) {
 
 		campaignsDataAccess.deleteCampaignById(campaignId);
-
 	}
-
 }

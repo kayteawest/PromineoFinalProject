@@ -25,7 +25,20 @@ public class PlayersController implements IPlayersController {
 	@Override
 	public int createPlayer(CreatePlayerRequest createPlayerRequest) {
 
-		return playersDataAccess.insertPlayer(createPlayerRequest.getPlayerName());
+		int playerId = playersDataAccess.insertPlayer(createPlayerRequest.getPlayerName());
+
+		CreatePlayerCharacterRequest[] characterRequests = createPlayerRequest.getCharacters();
+
+		if (characterRequests != null) {
+
+			for (CreatePlayerCharacterRequest characterRequest : characterRequests) {
+
+				createPlayerCharacter(playerId, characterRequest);
+			}
+
+		}
+
+		return playerId;
 	}
 
 	@Override
@@ -60,7 +73,6 @@ public class PlayersController implements IPlayersController {
 		playerCharactersDataAccess.updatePlayerCharacterById(playerCharacterId,
 				updatePlayerCharacterRequest.getPlayerCharacterName(),
 				updatePlayerCharacterRequest.getInitiativeBonus());
-
 	}
 
 	@Override
@@ -74,5 +86,4 @@ public class PlayersController implements IPlayersController {
 
 		playerCharactersDataAccess.deletePlayerCharacterById(playerCharacterId);
 	}
-
 }

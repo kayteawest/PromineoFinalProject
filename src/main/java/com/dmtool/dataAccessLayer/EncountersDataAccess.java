@@ -33,7 +33,7 @@ public class EncountersDataAccess implements IEncountersDataAccessLayer {
 		params.put("p_campaignId", campaignId);
 
 		// Execute stored procedure and return result
-		Integer encounterId = jdbcTemplate.execute("{call Insert_Encounter(:p_campaignId)}", params,
+		int encounterId = jdbcTemplate.execute("{call Insert_Encounter(:p_campaignId)}", params,
 				new PreparedStatementCallback<Integer>() {
 
 					@Override
@@ -47,7 +47,7 @@ public class EncountersDataAccess implements IEncountersDataAccessLayer {
 						resultSet.next();
 
 						// Map first row/column value to id
-						Integer id = resultSet.getInt(1);
+						int id = resultSet.getInt(1);
 
 						// Close the connection
 						resultSet.close();
@@ -55,12 +55,10 @@ public class EncountersDataAccess implements IEncountersDataAccessLayer {
 						// Return id
 						return id;
 					}
-
 				});
 
 		// Return encounter id
 		return encounterId;
-
 	}
 
 	@Override
@@ -85,12 +83,12 @@ public class EncountersDataAccess implements IEncountersDataAccessLayer {
 						resultSet.next();
 
 						// Create formatter to parse MySql DATETIME to LocalDateTime
-						var format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+						DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 						// Map first row to Encounter
-						var encounterId = resultSet.getInt(1);
-						var campaignId = resultSet.getInt(2);
-						var createdDate = LocalDateTime.parse(resultSet.getString(3), format);
+						int encounterId = resultSet.getInt(1);
+						int campaignId = resultSet.getInt(2);
+						LocalDateTime createdDate = LocalDateTime.parse(resultSet.getString(3), format);
 
 						// Close the connection
 						resultSet.close();
@@ -98,12 +96,10 @@ public class EncountersDataAccess implements IEncountersDataAccessLayer {
 						// Return Encounter
 						return new Encounter(encounterId, campaignId, createdDate);
 					}
-
 				});
 
 		// Return Encounter
 		return encounter;
-
 	}
 
 	@Override
@@ -115,7 +111,5 @@ public class EncountersDataAccess implements IEncountersDataAccessLayer {
 
 		// Execute stored procedure
 		jdbcTemplate.update("{call Delete_Encounter_ById(:p_encounterId)}", params);
-
 	}
-
 }
