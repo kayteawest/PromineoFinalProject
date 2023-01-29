@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    password: dmtool
+    username: dmtool
+    url: jdbc:mysql://localhost:3306/dmtool

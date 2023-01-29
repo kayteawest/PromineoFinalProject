@@ -1,11 +1,13 @@
 package com.dmtool.interfaces;
 
-import com.dmtool.models.Encounters;
+import com.dmtool.models.Encounter;
 
 public interface IEncountersDataAccessLayer {
-	
-	int insertEncounter();
-	Encounters selectEncounterById(int encounterId);
+
+	int insertEncounter(int campaignId);
+
+	Encounter selectEncounterById(int encounterId);
+
 	void deleteEncounterById(int encounterId);
 
 }

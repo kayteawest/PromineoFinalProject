@@ -52,10 +52,10 @@ BEGIN
   WHERE campaignId = p_campaignId;
 END //
 
-CREATE PROCEDURE Insert_Encounter(IN p_encounterId INT)
+CREATE PROCEDURE Insert_Encounter(IN p_campaignId INT)
 BEGIN
-  INSERT INTO Encounters (encounterId, createdDate)
-  VALUES (p_encounterId, Now());
+  INSERT INTO Encounters (campaignId, createdDate)
+  VALUES (p_campaignId, Now());
   
   SELECT LAST_INSERT_ID();
 END //
@@ -78,8 +78,6 @@ CREATE PROCEDURE Insert_Encounter_PlayerCharacter(IN p_encounterId INT,
 BEGIN
   INSERT INTO Encounter_PlayerCharacter (encounterId, characterId)
   VALUES (p_encounterId, p_characterId);
-  
-  SELECT LAST_INSERT_ID();
 END //
 
 CREATE PROCEDURE Delete_Encounter_PlayerCharacter_ByIds(IN p_encounterId INT,

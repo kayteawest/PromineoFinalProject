@@ -10,25 +10,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.dmtool.models.Campaigns;
+import com.dmtool.models.Campaign;
 import com.dmtool.models.CreateCampaignRequest;
 import com.dmtool.models.UpdateCampaignRequest;
 
 @RequestMapping("/campaigns")
 public interface ICampaignsController {
-	
+
 	@PostMapping("/create")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	int createCampaign( @RequestBody CreateCampaignRequest createCampaignRequest);
-	
+	int createCampaign(@RequestBody CreateCampaignRequest createCampaignRequest);
+
 	@GetMapping("/{campaignId}")
 	@ResponseStatus(code = HttpStatus.OK)
-	Campaigns getCampaign( @PathVariable int campaignId);
-	
+	Campaign getCampaign(@PathVariable int campaignId);
+
 	@PatchMapping("/{campaignId}")
 	@ResponseStatus(code = HttpStatus.OK)
-	void updateCampaign( @PathVariable int campaignId, @RequestBody UpdateCampaignRequest updateCampaignRequest);
-	
+	void updateCampaign(@PathVariable int campaignId, @RequestBody UpdateCampaignRequest updateCampaignRequest);
+
 	@DeleteMapping("/{campaignId}")
 	@ResponseStatus(code = HttpStatus.OK)
 	void deleteCampaign(@PathVariable int campaignId);

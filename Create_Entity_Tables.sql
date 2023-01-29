@@ -26,7 +26,7 @@ CREATE TABLE Players (
 
 CREATE TABLE Encounters (
     encounterId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    campaignId INT NOT NULL,
+    campaignId INT,
     createdDate DATETIME NOT NULL,
     
     CONSTRAINT FK_Campaign_To_Encounter_By_Id
@@ -37,7 +37,7 @@ CREATE TABLE Encounters (
 
 CREATE TABLE PlayerCharacters (
   characterId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  playerId INT NOT NULL,
+  playerId INT,
   characterName TEXT NOT NULL,
   createdDate DATETIME NOT NULL,
   initiativeBonus INT NOT NULL,
@@ -49,8 +49,8 @@ CREATE TABLE PlayerCharacters (
 );
 
 CREATE TABLE Encounter_PlayerCharacter(
-    EncounterId INT NOT NULL,
-    CharacterId INT NULL,
+    EncounterId INT,
+    CharacterId INT,
     
     CONSTRAINT FK_EPC_To_Encounter_By_Id
       FOREIGN KEY (EncounterId)

@@ -7,31 +7,33 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.dmtool.models.CreateEncounterRequest;
-import com.dmtool.models.Encounters;
+import com.dmtool.models.Encounter;
 
+@RequestMapping("/encounters")
 public interface IEncountersController {
-	
+
 	@PostMapping("/create")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	int createEncounter( @RequestBody CreateEncounterRequest createEncounterRequest);
-	
+	int createEncounter(@RequestBody CreateEncounterRequest createEncounterRequest);
+
 	@GetMapping("/{encounterId}")
 	@ResponseStatus(code = HttpStatus.OK)
-	Encounters getEncounter(@PathVariable int encounterId);
-	
+	Encounter getEncounter(@PathVariable int encounterId);
+
 	@PutMapping("/{encounterId}/playerCharacters/{playerCharacterId}")
 	@ResponseStatus(code = HttpStatus.OK)
 	void addPlayerCharacter(@PathVariable int encounterId, @PathVariable int playerCharacterId);
-	
+
 	@DeleteMapping("/{encounterId}/playerCharacters/{playerCharacterId}")
 	@ResponseStatus(code = HttpStatus.OK)
 	void removePlayerCharacter(@PathVariable int encounterId, @PathVariable int playerCharacterId);
-	
+
 	@DeleteMapping("/{encounterId}")
 	@ResponseStatus(code = HttpStatus.OK)
-	void deleteEncounter( @PathVariable int encounterId);
+	void deleteEncounter(@PathVariable int encounterId);
 
 }
